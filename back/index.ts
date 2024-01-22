@@ -21,18 +21,38 @@ const io = new Server<ClientToServerEvents, ServerToClientEvents>(server, {
 });
 
 io.on("connection", (socket: Socket<ClientToServerEvents, ServerToClientEvents>) => {
-    socket.on("clientCreateRoom", (data) => {
+    socket.on("clientCreateRoom", ({ userName }) => {
         const user = {
-            name: data.user,
-            id: 1,
+            userName: userName,
+            userCode: '1',
+            socketId: socket.id,
         };
 
-        const lobby = {
-            id: '123412'
+        const room = {
+            roomCode: '123412',
+            sockets: [socket.id],
+            users: [user],
         };
 
-        socket.join(lobby.id);
-        io.to(lobby.id).emit("serverCreateRoom", {user, lobby});
+        socket.join(room.roomCode);
+        io.to(room.roomCode).emit("serverJoinRoom", {user, room});
+    });
+
+    socket.on("clientJoinRoom", ({ userName, roomCode }) => {
+        const user = {
+            userName: userName,
+            userCode: '1',
+            socketId: socket.id,
+        };
+
+        const room = {
+            roomCode,
+            sockets: [socket.id],
+            users: [user],
+        };
+
+        socket.join(roomCode);
+        io.to(room.roomCode).emit("serverJoinRoom", {user, room});
     })
 });
 

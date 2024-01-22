@@ -1,7 +1,20 @@
+export interface IUser {
+    userName: string;
+    userCode: string;
+    socketId: string;
+};
+
+export interface IRoom {
+    roomCode: string;
+    sockets: string[];
+    users: IUser[];
+};
+
 export interface ServerToClientEvents {
-    serverCreateRoom: (data: {user:any, lobby:any}) => void;
+    serverJoinRoom: (data: {user:IUser, room:IRoom}) => void;
 }
 
 export interface ClientToServerEvents {
-    clientCreateRoom: (data: {user:string}) => void;
+    clientCreateRoom: (data: {userName:string}) => void;
+    clientJoinRoom: (data: {userName:string, roomCode:string}) => void;
 }
