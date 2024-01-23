@@ -2,6 +2,7 @@
   "extends": "expo/tsconfig.base",
   "compilerOptions": {
     "strict": true,
+    "module": "esnext",
     "isolatedModules": false,
     "skipLibCheck": true,
     "types": ["@types/styled-components-react-native"]

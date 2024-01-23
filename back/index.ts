@@ -29,8 +29,8 @@ io.on("connection", (socket: Socket<ClientToServerEvents, ServerToClientEvents>)
         };
 
         const room = {
-            roomCode: '123412',
-            sockets: [socket.id],
+            creator: user,
+            roomCode: '1',
             users: [user],
         };
 
@@ -46,8 +46,8 @@ io.on("connection", (socket: Socket<ClientToServerEvents, ServerToClientEvents>)
         };
 
         const room = {
+            creator: user,
             roomCode,
-            sockets: [socket.id],
             users: [user],
         };
 

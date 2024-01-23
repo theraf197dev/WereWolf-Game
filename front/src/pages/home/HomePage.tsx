@@ -7,15 +7,15 @@ import {
 } from './HomePage.styles';
 import {
   IHomePageProps,
-  IUser,
-  IRoom,
 } from './interfaces';
+import { IRoom } from '../../../../typings';
 
 const HomePage = ({
   socket,
 }: IHomePageProps) => {
   const [userName, setUserName] = useState<string>('');
   const [roomCode, setRoomCode] = useState<string>('');
+  const [room, setRoom] = useState<IRoom|null>(null);
 
   return (
     <ContainerStyles>
@@ -27,6 +27,7 @@ const HomePage = ({
             socket.emit("clientCreateRoom", {userName});
             socket.on("serverJoinRoom", (data) => {
               console.log(data);
+              setRoom(data.room);
             });
           }
         }/>
@@ -34,6 +35,7 @@ const HomePage = ({
             socket.emit("clientJoinRoom", {userName, roomCode});
             socket.on("serverJoinRoom", (data) => {
               console.log(data);
+              setRoom(data.room);
             });
           }
         }/>
