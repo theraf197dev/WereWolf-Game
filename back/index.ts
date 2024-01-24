@@ -1,4 +1,5 @@
 import express from 'express';
+import axios from 'axios';
 import { createServer } from 'http';
 import { Server, Socket } from 'socket.io';
 import cors from 'cors';
@@ -22,20 +23,22 @@ const io = new Server<ClientToServerEvents, ServerToClientEvents>(server, {
 
 io.on("connection", (socket: Socket<ClientToServerEvents, ServerToClientEvents>) => {
     socket.on("clientCreateRoom", ({ userName }) => {
-        const user = {
-            userName: userName,
-            userCode: '1',
+        axios.post('http://localhost:4000/api/user', {
+            userName,
             socketId: socket.id,
-        };
-
-        const room = {
-            creator: user,
-            roomCode: '1',
-            users: [user],
-        };
-
-        socket.join(room.roomCode);
-        io.to(room.roomCode).emit("serverJoinRoom", {user, room});
+        }).then(res => {
+            console.log(res.data)
+            axios.post('http://localhost:4000/api/room', {
+                creator: res.data.userCode,
+            }).then(roomRes => {
+                socket.join(roomRes.data.roomCode);
+                io.to(roomRes.data.roomCode).emit("serverJoinRoom", {user: res.data, room: roomRes.data});
+            }).catch(e => {
+                console.error(e.code)
+            })
+        }).catch(e => {
+            console.error(e.code)
+        })
     });
 
     socket.on("clientJoinRoom", ({ userName, roomCode }) => {
