@@ -7,9 +7,9 @@ const CRoom = {
                 message: "Content can not be empty!"
               });
         }
-
+        
         const room = {
-            creator: req.body.creator,
+            roomName: req.body.roomName,
         };
         
         MRoom.create(room, (err:any, data:any) => {

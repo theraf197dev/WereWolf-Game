@@ -11,7 +11,7 @@ export interface IRoom {
 }
 
 export interface ServerToClientEvents {
-    serverJoinRoom: (data: {user:IUser, room:IRoom}) => void;
+    serverJoinRoom: (data: {user:any, room:any}) => void;
 }
 
 export interface ClientToServerEvents {

@@ -1,7 +1,7 @@
 import db from '../database';
 
 const MRoom = function(this: any, room: any) {
-    this.creator = room.creator;
+    this.roomName = room.roomName;
 };
 
 MRoom.create = (newRoom: any, result: any) => {
@@ -12,7 +12,7 @@ MRoom.create = (newRoom: any, result: any) => {
             return;
         }
         
-        result(null, newRoom);
+        result(null, {roomCode: res.insertId});
     });
 };
 

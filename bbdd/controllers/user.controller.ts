@@ -11,6 +11,8 @@ const CUser = {
         const user = {
             userName: req.body.userName,
             socketId: req.body.socketId,
+            creator: req.body.creator,
+            roomCode: req.body.roomCode,
         };
         
         MUser.create(user, (err:any, data:any) => {
