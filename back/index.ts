@@ -23,35 +23,13 @@ const io = new Server<ClientToServerEvents, ServerToClientEvents>(server, {
 
 io.on("connection", (socket: Socket<ClientToServerEvents, ServerToClientEvents>) => {
     socket.on("clientCreateRoom", ({ userName }) => {
-        axios.post('http://localhost:4000/api/room', {roomName: 'test'}).then(roomRes => {
-            axios.post('http://localhost:4000/api/user', {
-                userName,
-                creator: true,
-                socketId: socket.id,
-                roomCode: roomRes.data.roomCode,
-            }).then(res => {
-                socket.join(roomRes.data.roomCode);
-                io.to(roomRes.data.roomCode).emit("serverJoinRoom", {user: res.data, room: roomRes.data});
-            }).catch(e => {
-                console.error(e.code)
-            });
-        }).catch(e => {
-            console.error(e.code)
-        });
+        socket.join(userName);
+        io.to(userName).emit("serverJoinRoom", {user: userName, room: userName});
     });
 
     socket.on("clientJoinRoom", ({ userName, roomCode }) => {
-        axios.post('http://localhost:4000/api/user', {
-            userName,
-            creator: false,
-            socketId: socket.id,
-            roomCode: roomCode,
-        }).then(res => {
-            socket.join(roomCode);
-            io.to(roomCode).emit("serverJoinRoom", {user: res.data, room: roomCode});
-        }).catch(e => {
-            console.error(e.code)
-        });
+        socket.join(roomCode);
+        io.to(roomCode).emit("serverJoinRoom", {user: userName, room: roomCode});
     })
 });
 
