@@ -9,15 +9,19 @@ import {
   IRoomProps,
 } from './interfaces';
 
+type Props = {
+  route: any,
+  navigation: any,
+}
+
 const Room = ({
-  socket,
-  users = [],
-  roomData,
-}: IRoomProps) => {
+  navigation
+}: Props) => {
 
   return (
     <ContainerStyles>
-      {users.map(user => <ButtonWrapperStyles key={user.userCode} title={user.userName} />)}
+      <Button title='ASFASF' onPress={() => navigation.navigate('Home')} />
+      {/* {users.map(user => <ButtonWrapperStyles key={user.userCode} title={user.userName} />)} */}
     </ContainerStyles>
   );
 };
