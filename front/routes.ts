@@ -8,6 +8,6 @@ import type {
     RouteConfig,
     StackNavigationState,
 } from '@react-navigation/core';
-import HomePage from './src/pages/home/HomePage';
+import HomePage from './src/pages/home/Home';
 import Room from './src/pages/room/Room';
 

@@ -5,7 +5,7 @@ import { AppStackRoutesType } from '../../../type';
 import {
   ButtonWrapperStyles,
   ContainerStyles,
-} from './HomePage.styles';
+} from './Home.styles';
 import {
   IHomePageProps,
 } from './interfaces';
@@ -16,10 +16,11 @@ type Props = {
   navigation: any,
 }
 
-const HomePage = ({
+const Home = ({
   navigation,
   route,
-}: Props) => {
+  increment,
+}: any) => {
   const [userName, setUserName] = useState<string>('');
   const [roomCode, setRoomCode] = useState<string>('');
   const [room, setRoom] = useState<IRoom|null>(null);
@@ -36,7 +37,7 @@ const HomePage = ({
             //   console.log(data);
             //   setRoom(data.room);
             // });
-            navigation.navigate('Room');
+            increment();
           }
         }/>
         <Button title='Join Game' onPress={() => {
@@ -52,4 +53,4 @@ const HomePage = ({
   );
 };
 
-export default HomePage;
+export default Home;
