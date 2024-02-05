@@ -6,6 +6,8 @@ import cors from 'cors';
 
 import {
     ClientToServerEvents,
+    ILobby,
+    IUser,
     ServerToClientEvents,
 } from '../typings';
 
@@ -22,15 +24,28 @@ const io = new Server<ClientToServerEvents, ServerToClientEvents>(server, {
 });
 
 io.on("connection", (socket: Socket<ClientToServerEvents, ServerToClientEvents>) => {
-    socket.on("clientCreateRoom", ({ userName }) => {
+    socket.on("clientCreateLobby", ({ userName }) => {
         socket.join(userName);
-        io.to(userName).emit("serverJoinRoom", {user: userName, room: userName});
+
+        const user:IUser = {
+            userName,
+            userCode: socket.id,
+            socketId: socket.id,
+        }
+
+        const lobby:ILobby = {
+            creator: user,
+            lobbyCode: '21451251',
+            users: [user]
+        }
+        io.to(userName).emit("userJoinLobby", {lobby});
+        socket.broadcast.emit("userCreateLobby", {lobby});
     });
 
-    socket.on("clientJoinRoom", ({ userName, roomCode }) => {
-        socket.join(roomCode);
-        io.to(roomCode).emit("serverJoinRoom", {user: userName, room: roomCode});
-    })
+    // socket.on("clientJoinLobby", ({ userName, lobbyCode }) => {
+    //     socket.join(lobbyCode);
+    //     io.to(lobbyCode).emit("userJoinLobby", {user: userName, room: lobbyCode});
+    // })
 });
 
 //Sends to every socket

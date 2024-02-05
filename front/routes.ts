@@ -9,5 +9,5 @@ import type {
     StackNavigationState,
 } from '@react-navigation/core';
 import HomePage from './src/pages/home/Home';
-import Room from './src/pages/room/Room';
+import Room from './src/pages/room/Lobby';
 

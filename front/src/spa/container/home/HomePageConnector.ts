@@ -1,12 +1,14 @@
 import { connect } from "react-redux";
-import PageViewer from "./HomePage";
+import HomePage from "./HomePage";
+import { addLobby, joinLobby } from "../../core/home/reducer";
 
 const mapStateToProps = (state:any) => ({
-    rooms: state.home.rooms,
-    test: state.home.test,
+    lobbies: state.home.lobbies,
 });
 
 const mapDispatchToProps = {
+    addLobby,
+    joinLobby
 };
   
-export default connect(mapStateToProps, mapDispatchToProps)(PageViewer);
+export default connect(mapStateToProps, mapDispatchToProps)(HomePage);

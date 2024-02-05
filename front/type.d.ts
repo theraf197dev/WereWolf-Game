@@ -1,11 +1,11 @@
 import {
     NativeStackScreenProps,
 } from '@react-navigation/native-stack';
-import { IRoomProps } from './src/pages/room/interfaces';
+import { ILobbyProps } from './src/pages/room/interfaces';
 
 export type AppStackParamList = {
     Home: IHomePageProps;
-    Room: IRoomProps;
+    Room: ILobbyProps;
 };
   
 export type AppStackRoutesType = NativeStackScreenProps<

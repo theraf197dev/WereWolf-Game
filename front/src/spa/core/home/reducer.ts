@@ -1,15 +1,25 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
+import { ILobby, IUser } from '../../../../../typings';
+
+interface IHomeProps {
+    lobbies: ILobby[]
+};
+
+const initialState = { lobbies: [] } as IHomeProps;
 
 export const homeSlice = createSlice({
     name: 'home',
-    initialState: {
-        rooms: [],
-        test: {},
-    },
+    initialState,
     reducers: {
-        increment: (state) => {state.test = {algo:1}},
+        addLobby: (homeReducer, action: PayloadAction<any>) => {
+            console.log(action);
+            homeReducer.lobbies.push(action.payload);
+        },
+        joinLobby: (homeReducer, action: PayloadAction<any>) => {
+            
+        }
     }
 });
 
-export const {increment} = homeSlice.actions;
+export const { addLobby, joinLobby } = homeSlice.actions;
 export default homeSlice.reducer;

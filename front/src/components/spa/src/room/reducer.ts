@@ -1,6 +1,6 @@
-import { IRoomProps } from "../../../../pages/room/interfaces";
+import { ILobbyProps } from "../../../../pages/room/interfaces";
 
-export const roomReducer: IRoomProps = {
+export const roomReducer: ILobbyProps = {
     roomData: {},
     users: [],
 };

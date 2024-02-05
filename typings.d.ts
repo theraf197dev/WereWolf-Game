@@ -4,17 +4,18 @@ export interface IUser {
     socketId: string;
 }
 
-export interface IRoom {
+export interface ILobby {
     creator: IUser;
-    roomCode: string;
+    lobbyCode: string;
     users: IUser[];
 }
 
 export interface ServerToClientEvents {
-    serverJoinRoom: (data: {user:any, room:any}) => void;
+    userJoinLobby: (data: {lobby:ILobby}) => void;
+    userCreateLobby: (data: {lobby:ILobby}) => void;
 }
 
 export interface ClientToServerEvents {
-    clientCreateRoom: (data: {userName:string}) => void;
-    clientJoinRoom: (data: {userName:string, roomCode:string}) => void;
+    clientCreateLobby: (data: {userName:string}) => void;
+    clientJoinLobby: (data: {userName:string, lobbyCode:string}) => void;
 }

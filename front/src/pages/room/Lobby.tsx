@@ -4,10 +4,10 @@ import {Button, Text, TextInput} from 'react-native';
 import {
   ButtonWrapperStyles,
   ContainerStyles,
-} from './Room.styles';
+} from './Lobby.styles';
 
 
-const Room = ({
+const Lobby = ({
   navigation
 }: any) => {
 
@@ -19,4 +19,4 @@ const Room = ({
   );
 };
 
-export default Room;
+export default Lobby;

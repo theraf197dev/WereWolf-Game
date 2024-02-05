@@ -1,9 +1,11 @@
 import Home from "../../../pages/home/Home";
+import { getHomeProps } from "./helpers";
 
 const HomePage = (props:any) => {
-    console.log(props)
+    console.log(props);
+    
     return (
-        <Home route={props.route} navigation={props.navigation} rooms={props.rooms} increment={props.increment} />
+        <Home {...getHomeProps(props)} />
     )
 }
 
