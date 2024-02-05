@@ -1,6 +1,5 @@
 import { connect } from "react-redux";
 import PageViewer from "./HomePage";
-import { increment } from "../../core/home/reducer";
 
 const mapStateToProps = (state:any) => ({
     rooms: state.home.rooms,
@@ -8,7 +7,6 @@ const mapStateToProps = (state:any) => ({
 });
 
 const mapDispatchToProps = {
-    increment,
 };
   
 export default connect(mapStateToProps, mapDispatchToProps)(PageViewer);

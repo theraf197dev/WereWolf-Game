@@ -5,18 +5,11 @@ import {
   ButtonWrapperStyles,
   ContainerStyles,
 } from './Room.styles';
-import {
-  IRoomProps,
-} from './interfaces';
 
-type Props = {
-  route: any,
-  navigation: any,
-}
 
 const Room = ({
   navigation
-}: Props) => {
+}: any) => {
 
   return (
     <ContainerStyles>
