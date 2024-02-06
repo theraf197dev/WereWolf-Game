@@ -1,19 +1,15 @@
-import { useEffect } from 'react';
-import Lobby from '../../../pages/room/Lobby';
+import { useEffect } from "react";
+import Lobby from "../../../pages/room/Lobby";
 import { getLobbyProps } from "./helpers";
 
-const LobbyPage = (props:any) => {
-    console.log(props);
+const LobbyPage = (props: any) => {
+  useEffect(() => {
+    props.init({
+      lobbyData: props.route.params.lobbyData,
+    });
+  }, []);
 
-    useEffect(() => {
-      props.init({
-        lobbyData: props.route.params.lobbyData,
-      });
-    }, []);
-    
-    return (
-        <Lobby {...getLobbyProps(props)} />
-    )
-}
+  return <Lobby {...getLobbyProps(props)} />;
+};
 
 export default LobbyPage;

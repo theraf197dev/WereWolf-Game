@@ -1,36 +1,36 @@
-import express from 'express';
-import { createServer } from 'http';
-import { Server, Socket } from 'socket.io';
-import cors from 'cors';
+import express from "express";
+import { createServer } from "http";
+import { Server, Socket } from "socket.io";
+import cors from "cors";
 
-import {
-    ClientToServerEvents,
-    ServerToClientEvents,
-} from '../typings';
-import { createLobby } from './socket/services/clientCreateLobby';
-import { joinLobby } from './socket/services/clientJoinLobby';
+import { ClientToServerEvents, ServerToClientEvents } from "../typings";
+import { createLobby } from "./socket/services/clientCreateLobby";
+import { joinLobby } from "./socket/services/clientJoinLobby";
 
 const app = express();
 app.use(cors());
 
 const server = createServer(app);
 const io = new Server<ClientToServerEvents, ServerToClientEvents>(server, {
-    cors: {
-        origin: "http://localhost:8081",
-        methods: ["GET", "POST"],
-        credentials: true,
-    },
+  cors: {
+    origin: "http://localhost:8081",
+    methods: ["GET", "POST"],
+    credentials: true,
+  },
 });
 
-io.on("connection", (socket: Socket<ClientToServerEvents, ServerToClientEvents>) => {
+io.on(
+  "connection",
+  (socket: Socket<ClientToServerEvents, ServerToClientEvents>) => {
     socket.on("clientCreateLobby", ({ userName }) => {
-        createLobby({io, socket, userName});
+      createLobby({ io, socket, userName });
     });
 
     socket.on("clientJoinLobby", ({ userName, lobby }) => {
-        joinLobby({io, socket, userName, lobby});
-    })
-});
+      joinLobby({ io, socket, userName, lobby });
+    });
+  }
+);
 
 //Sends to every socket
 // io.on("connection", (socket: Socket<ClientToServerEvents, ServerToClientEvents>) => {
@@ -60,4 +60,3 @@ io.on("connection", (socket: Socket<ClientToServerEvents, ServerToClientEvents>)
 // });
 
 server.listen(3000);
-

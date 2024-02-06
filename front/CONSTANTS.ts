@@ -1,1 +1,1 @@
-export const DEV_SERVER:string = 'http://localhost:3000';
+export const DEV_SERVER: string = "http://localhost:3000";

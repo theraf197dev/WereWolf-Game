@@ -1,14 +1,16 @@
 import { ILobbyPageProps } from "../interfaces";
 
 export const getLobbyProps = ({
-    lobbyData,
-    navigation,
-    updateLobbyData,
-    route,
+  init,
+  lobbyData,
+  navigation,
+  route,
+  updateLobbyData,
 }: ILobbyPageProps) => ({
-    lobbyData,
-    navigation,
-    updateLobbyData,
-    route,
-    socket: route.params.socket,
+  init,
+  lobbyData,
+  navigation,
+  route,
+  socket: route.params.socket,
+  updateLobbyData,
 });
