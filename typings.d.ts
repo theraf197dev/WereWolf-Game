@@ -9,22 +9,26 @@ export interface ILobby {
   users: IUser[];
 }
 
-export interface ServerInputData {
+export interface IServerInputData {
   lobby: ILobby;
 }
 
-export interface ClientInputData {
+export interface IClientCreateLobbyInputData {
+  userName: string;
+}
+
+export interface IClientJoinLobbyInputData {
   lobby: ILobby;
   userName: string;
 }
 
 export interface ServerToClientEvents {
-  userJoinLobby: (data: ServerInputData) => void;
-  userCreateLobby: (data: ServerInputData) => void;
-  userLandOnLobby: (data: ServerInputData) => void;
+  userJoinLobby: (data: IServerInputData) => void;
+  userCreateLobby: (data: IServerInputData) => void;
+  userLandOnLobby: (data: IServerInputData) => void;
 }
 
 export interface ClientToServerEvents {
-  clientCreateLobby: (data: ClientInputData) => void;
-  clientJoinLobby: (data: ClientInputData) => void;
+  clientCreateLobby: (data: IClientCreateLobbyInputData) => void;
+  clientJoinLobby: (data: IClientJoinLobbyInputData) => void;
 }

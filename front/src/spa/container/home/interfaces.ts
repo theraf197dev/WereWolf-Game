@@ -4,7 +4,6 @@ import {
   ILobby,
   ServerToClientEvents,
 } from "../../../../../typings";
-import { NativeStackScreenProps } from "@react-navigation/native-stack";
 
 export interface IHomePageProps {
   addLobby(payload: { lobby: ILobby }): void;
