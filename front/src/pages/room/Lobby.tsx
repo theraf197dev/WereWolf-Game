@@ -1,8 +1,10 @@
-import React, { useEffect, useState } from "react";
-import { Button, Text, TextInput } from "react-native";
+import React, { useEffect } from "react";
+import { Button, Text, View } from "react-native";
 
-import { ButtonWrapperStyles, ContainerStyles } from "./Lobby.styles";
+import { ContainerStyles } from "./Lobby.styles";
 import { ILobbyPageProps } from "../../spa/container/lobby/interfaces";
+import { IServerInputData } from "../../../../typings";
+import { isCreator } from "./helpers";
 
 const Lobby = ({
   navigation,
@@ -11,7 +13,7 @@ const Lobby = ({
   updateLobbyData,
 }: ILobbyPageProps) => {
   useEffect(() => {
-    socket.on("userLandOnLobby", (data: any) => {
+    socket.on("userLandOnLobby", (data: IServerInputData) => {
       updateLobbyData({ lobbyData: data.lobby });
     });
   }, []);
@@ -22,8 +24,11 @@ const Lobby = ({
 
   return (
     <ContainerStyles>
-      <Button title="ASFASF" onPress={() => navigation.navigate("Home")} />
-      {/* {users.map(user => <ButtonWrapperStyles key={user.userCode} title={user.userName} />)} */}
+      <Text>Lobby ID: {lobbyData.lobbyCode}</Text>
+      <View>
+        {lobbyData.users?.map((user)=> <Button key={user.userCode} title={user.userName}></Button>)}
+      </View>
+      {isCreator(lobbyData.creator, socket.id) && <Button title="Start Game"></Button>}
     </ContainerStyles>
   );
 };

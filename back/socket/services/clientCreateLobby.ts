@@ -15,7 +15,7 @@ export const createLobby = ({ io, socket, userName }: IClientCreateLobby) => {
     lobbyCode: generateLobbyUniqueId(),
     users: [user],
   };
-
+  
   socket.join(lobby.lobbyCode);
   io.to(socket.id).emit("userJoinLobby", { lobby });
   socket.broadcast.emit("userCreateLobby", { lobby });

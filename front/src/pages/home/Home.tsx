@@ -3,6 +3,7 @@ import { Button, Text, TextInput } from "react-native";
 
 import { ButtonWrapperStyles, ContainerStyles } from "./Home.styles";
 import { IHomePageProps } from "../../spa/container/home/interfaces";
+import { IServerInputData } from "../../../../typings";
 
 const Home = ({
   addLobby,
@@ -14,26 +15,23 @@ const Home = ({
   socket,
   selectedLobby,
 }: IHomePageProps) => {
-  console.log(lobbies);
+  const [userName, setUsername] = useState('');
+  const [lobbyCode, setLobbyCode] = useState('');
 
   useEffect(() => {
-    socket.on("userCreateLobby", (data: any) => {
-      console.log(data);
+    socket.on("userCreateLobby", (data: IServerInputData) => {
       addLobby({ lobby: data.lobby });
-    });
-
-    socket.on("userJoinLobby", (data: any) => {
-      console.log("user join lobby");
-      console.log(data);
-      navigation.navigate("Lobby", { lobbyData: data.lobby, socket });
     });
   }, [lobbies]);
 
+  socket.on("userJoinLobby", (data: IServerInputData) => {
+    navigation.navigate("Lobby", { lobbyData: data.lobby, socket });
+  });
+
   useEffect(() => {
     if (!error && selectedLobby) {
-      console.log(selectedLobby);
       socket.emit("clientJoinLobby", {
-        userName: "sfsagsag",
+        userName,
         lobby: selectedLobby,
       });
     } else if (error && !selectedLobby) {
@@ -44,16 +42,18 @@ const Home = ({
   return (
     <ContainerStyles>
       <Text>Welcome to the Werewolf Game</Text>
+      <TextInput inputMode="text" onChangeText={(text) => setUsername(text)}></TextInput>
+      <TextInput inputMode="text" onChangeText={(text) => setLobbyCode(text)}></TextInput>
       <ButtonWrapperStyles>
         <Button
           title="Create Game"
           onPress={() =>
-            socket.emit("clientCreateLobby", { userName: "asfsafasfg" })
+            socket.emit("clientCreateLobby", { userName })
           }
         />
         <Button
           title="Join Game"
-          onPress={() => findLobby({ lobbyCode: "21451251" })}
+          onPress={() => findLobby({ lobbyCode })}
         />
       </ButtonWrapperStyles>
     </ContainerStyles>
