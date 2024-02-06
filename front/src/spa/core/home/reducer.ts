@@ -1,5 +1,6 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { ILobby, IUser } from "../../../../../typings";
+import { ILobby } from "../../../../../typings";
+import { IAddLobbyPayloadAction, IFindLobbyPayloadAction } from "../interfaces";
 
 interface IHomeProps {
   error: boolean;
@@ -17,11 +18,11 @@ export const homeSlice = createSlice({
   name: "home",
   initialState,
   reducers: {
-    addLobby: (state, action: PayloadAction<any>) => {
+    addLobby: (state, action: PayloadAction<IAddLobbyPayloadAction>) => {
       const { lobby } = action.payload;
       state.lobbies.push(lobby);
     },
-    findLobby: (state, action: PayloadAction<any>) => {
+    findLobby: (state, action: PayloadAction<IFindLobbyPayloadAction>) => {
       const { lobbyCode } = action.payload;
 
       const lobby = state.lobbies.find(

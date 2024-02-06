@@ -10,13 +10,22 @@ export interface ILobby {
   users: IUser[];
 }
 
+export interface ServerInputData {
+  lobby: ILobby;
+}
+
+export interface ClientInputData {
+  userName: string;
+  lobby?: ILobby;
+}
+
 export interface ServerToClientEvents {
-  userJoinLobby: (data: { lobby: ILobby }) => void;
-  userCreateLobby: (data: { lobby: ILobby }) => void;
-  userLandOnLobby: (data: { lobby: ILobby }) => void;
+  userJoinLobby: (data: ServerInputData) => void;
+  userCreateLobby: (data: ServerInputData) => void;
+  userLandOnLobby: (data: ServerInputData) => void;
 }
 
 export interface ClientToServerEvents {
-  clientCreateLobby: (data: { userName: string }) => void;
-  clientJoinLobby: (data: { userName: string; lobby: ILobby }) => void;
+  clientCreateLobby: (data: ClientInputData) => void;
+  clientJoinLobby: (data: ClientInputData) => void;
 }
