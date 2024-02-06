@@ -29,7 +29,7 @@ const Home = ({
 
     socket.on("userJoinLobby", (data: any) => {
       console.log('user join lobby');
-      // navigation.navidate('lobby');
+      navigation.navigate('Lobby');
     });
   }, [lobbies])
   

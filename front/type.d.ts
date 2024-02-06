@@ -5,11 +5,11 @@ import { ILobbyProps } from './src/pages/room/interfaces';
 
 export type AppStackParamList = {
     Home: IHomePageProps;
-    Room: ILobbyProps;
+    Lobby: ILobbyProps;
 };
   
 export type AppStackRoutesType = NativeStackScreenProps<
     AppStackParamList,
     Home,
-    Room,
+    Lobby,
 >;

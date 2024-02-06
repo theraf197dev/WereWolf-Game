@@ -8,6 +8,7 @@ import { AppStackParamList } from './type';
 import { Provider } from 'react-redux';
 import store from './src/spa/store/store';
 import HomePageConnector from './src/spa/container/home/HomePageConnector';
+import LobbyPageConnector from './src/spa/container/lobby/LobbyPageConnector';
 
 const Stack = createNativeStackNavigator<AppStackParamList>();
 
@@ -18,7 +19,7 @@ export default function App() {
       <NavigationContainer>
         <Stack.Navigator initialRouteName='Home'>
           <Stack.Screen name='Home' component={HomePageConnector} options={{headerShown: false}} />
-          {/* <Stack.Screen name='Room' component={Room}/> */}
+          <Stack.Screen name='Lobby' component={LobbyPageConnector} options={{headerShown: false}} />
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>
