@@ -4,6 +4,7 @@ import { ClientToServerEvents, ILobby, ServerToClientEvents } from "../../../../
 export interface ILobbyPageProps {
     lobbyData: ILobby,
     navigation: any,
+    updateLobbyData(payload: {lobbyData: ILobby}): void,
     route: any,
     socket: Socket<ServerToClientEvents, ClientToServerEvents>,
 };

@@ -13,9 +13,10 @@ export interface ILobby {
 export interface ServerToClientEvents {
     userJoinLobby: (data: {lobby:ILobby}) => void;
     userCreateLobby: (data: {lobby:ILobby}) => void;
+    userLandOnLobby: (data: {lobby:ILobby}) => void;
 }
 
 export interface ClientToServerEvents {
     clientCreateLobby: (data: {userName:string}) => void;
-    clientJoinLobby: (data: {userName:string, lobbyCode:string}) => void;
+    clientJoinLobby: (data: {userName:string, lobby:ILobby}) => void;
 }

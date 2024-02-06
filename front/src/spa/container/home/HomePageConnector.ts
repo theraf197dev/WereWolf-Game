@@ -1,14 +1,14 @@
 import { connect } from "react-redux";
 import HomePage from "./HomePage";
-import { addLobby, joinLobby } from "../../core/home/reducer";
+import { addLobby, findLobby } from "../../core/home/reducer";
 
 const mapStateToProps = (state:any) => ({
-    lobbies: state.home.lobbies,
+    ...state.home,
 });
 
 const mapDispatchToProps = {
     addLobby,
-    joinLobby
+    findLobby
 };
   
 export default connect(mapStateToProps, mapDispatchToProps)(HomePage);

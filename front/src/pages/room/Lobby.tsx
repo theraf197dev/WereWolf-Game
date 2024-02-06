@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {Button, Text, TextInput} from 'react-native';
 
 import {
@@ -8,8 +8,22 @@ import {
 
 
 const Lobby = ({
-  navigation
+  navigation,
+  lobbyData,
+  socket,
+  updateLobbyData,
 }: any) => {
+
+  useEffect(() => {
+    socket.on("userLandOnLobby", (data: any) => {
+      updateLobbyData({lobbyData: data.lobby});
+    });
+  }, []);
+
+  useEffect(() => {
+    console.log(lobbyData)
+  }, [lobbyData])
+  
 
   return (
     <ContainerStyles>

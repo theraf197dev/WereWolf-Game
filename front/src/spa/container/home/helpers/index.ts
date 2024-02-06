@@ -2,16 +2,20 @@ import { IHomePageProps } from "../interfaces";
 
 export const getHomeProps = ({
     addLobby,
-    joinLobby,
+    error,
+    findLobby,
     lobbies,
     navigation,
     route,
+    selectedLobby,
     socket,
 }: IHomePageProps) => ({
     addLobby,
-    joinLobby,
+    error,
+    findLobby,
     lobbies,
     navigation,
     route,
+    selectedLobby,
     socket,
 });

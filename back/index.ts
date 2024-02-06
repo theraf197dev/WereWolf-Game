@@ -38,14 +38,25 @@ io.on("connection", (socket: Socket<ClientToServerEvents, ServerToClientEvents>)
             lobbyCode: '21451251',
             users: [user]
         }
-        io.to(userName).emit("userJoinLobby", {lobby});
+
+        socket.join(lobby.lobbyCode);
+        io.to(socket.id).emit("userJoinLobby", {lobby});
         socket.broadcast.emit("userCreateLobby", {lobby});
     });
 
-    // socket.on("clientJoinLobby", ({ userName, lobbyCode }) => {
-    //     socket.join(lobbyCode);
-    //     io.to(lobbyCode).emit("userJoinLobby", {user: userName, room: lobbyCode});
-    // })
+    socket.on("clientJoinLobby", ({ userName, lobby }) => {
+        const user:IUser = {
+            userName,
+            userCode: socket.id,
+            socketId: socket.id,
+        };
+
+        lobby.users.push(user);
+        
+        socket.join(lobby.lobbyCode);
+        io.to(socket.id).emit("userJoinLobby", {lobby});
+        io.to(lobby.lobbyCode).emit("userLandOnLobby", {lobby});
+    })
 });
 
 //Sends to every socket
