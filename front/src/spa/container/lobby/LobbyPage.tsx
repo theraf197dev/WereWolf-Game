@@ -8,7 +8,6 @@ const LobbyPage = (props:any) => {
     useEffect(() => {
       props.init({
         lobbyData: props.route.params.lobbyData,
-        socket: props.route.params.socket,
       });
     }, []);
     

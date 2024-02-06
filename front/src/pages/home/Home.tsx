@@ -6,11 +6,6 @@ import {
   ContainerStyles,
 } from './Home.styles';
 import { IHomePageProps } from '../../spa/container/home/interfaces';
-import { Socket, io } from 'socket.io-client';
-import { ServerToClientEvents, ClientToServerEvents } from '../../../../typings';
-import { DEV_SERVER } from '../../../CONSTANTS';
-
-const socket: Socket<ServerToClientEvents, ClientToServerEvents> = io(DEV_SERVER);
 
 const Home = ({
   addLobby,
@@ -19,6 +14,7 @@ const Home = ({
   lobbies,
   navigation,
   route,
+  socket,
   selectedLobby,
 }: IHomePageProps) => {
   console.log(lobbies)
@@ -37,9 +33,6 @@ const Home = ({
   }, [lobbies]);
 
   useEffect(() => {
-    console.log('afasf')
-    console.log(error)
-    console.log(selectedLobby)
     if (!error && selectedLobby) {
       console.log(selectedLobby)
       socket.emit('clientJoinLobby', {userName: 'sfsagsag', lobby: selectedLobby});

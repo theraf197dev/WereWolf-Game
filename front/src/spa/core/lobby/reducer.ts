@@ -1,10 +1,8 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { ClientToServerEvents, ILobby, ServerToClientEvents } from '../../../../../typings';
-import { Socket } from 'socket.io-client';
+import { ILobby } from '../../../../../typings';
 
 interface ILobbyProps {
-    lobbyData: ILobby,
-    socket: Socket<ServerToClientEvents, ClientToServerEvents>,
+    lobbyData: ILobby
 };
 
 const initialState = { lobbyData: {} } as ILobbyProps;
@@ -14,9 +12,8 @@ export const lobbySlice = createSlice({
     initialState,
     reducers: {
         init: (state, action: PayloadAction<any>) => {
-            const {lobbyData, socket} = action.payload;
+            const {lobbyData} = action.payload;
             state.lobbyData = lobbyData;
-            state.socket = socket;
         },
         updateLobbyData: (state, action: PayloadAction<any>) => {
             const { lobbyData } = action.payload;

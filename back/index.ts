@@ -1,15 +1,14 @@
 import express from 'express';
-import axios from 'axios';
 import { createServer } from 'http';
 import { Server, Socket } from 'socket.io';
 import cors from 'cors';
 
 import {
     ClientToServerEvents,
-    ILobby,
-    IUser,
     ServerToClientEvents,
 } from '../typings';
+import { createLobby } from './socket/services/clientCreateLobby';
+import { joinLobby } from './socket/services/clientJoinLobby';
 
 const app = express();
 app.use(cors());
@@ -25,37 +24,11 @@ const io = new Server<ClientToServerEvents, ServerToClientEvents>(server, {
 
 io.on("connection", (socket: Socket<ClientToServerEvents, ServerToClientEvents>) => {
     socket.on("clientCreateLobby", ({ userName }) => {
-        socket.join(userName);
-
-        const user:IUser = {
-            userName,
-            userCode: socket.id,
-            socketId: socket.id,
-        }
-
-        const lobby:ILobby = {
-            creator: user,
-            lobbyCode: '21451251',
-            users: [user]
-        }
-
-        socket.join(lobby.lobbyCode);
-        io.to(socket.id).emit("userJoinLobby", {lobby});
-        socket.broadcast.emit("userCreateLobby", {lobby});
+        createLobby({io, socket, userName});
     });
 
     socket.on("clientJoinLobby", ({ userName, lobby }) => {
-        const user:IUser = {
-            userName,
-            userCode: socket.id,
-            socketId: socket.id,
-        };
-
-        lobby.users.push(user);
-        
-        socket.join(lobby.lobbyCode);
-        io.to(socket.id).emit("userJoinLobby", {lobby});
-        io.to(lobby.lobbyCode).emit("userLandOnLobby", {lobby});
+        joinLobby({io, socket, userName, lobby});
     })
 });
 

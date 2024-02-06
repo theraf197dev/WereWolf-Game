@@ -1,5 +1,5 @@
 import { Socket } from "socket.io-client";
-import { ClientToServerEvents, ILobby, IUser, ServerToClientEvents } from "../../../../../typings";
+import { ClientToServerEvents, ILobby, ServerToClientEvents } from "../../../../../typings";
 
 export interface IHomePageProps {
     addLobby(payload: {lobby: ILobby}): void,

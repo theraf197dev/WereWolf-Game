@@ -5,11 +5,10 @@ export const getLobbyProps = ({
     navigation,
     updateLobbyData,
     route,
-    socket,
 }: ILobbyPageProps) => ({
     lobbyData,
     navigation,
     updateLobbyData,
     route,
-    socket: socket || route.params.socket,
+    socket: route.params.socket,
 });

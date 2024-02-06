@@ -7,7 +7,6 @@ import {
 
 const mapStateToProps = (state:any) => ({
     lobbyData: state.lobby.lobbyData,
-    socket: state.lobby.socket,
 });
 
 const mapDispatchToProps = {
