@@ -1,7 +1,6 @@
 export interface IUser {
   userName: string;
   userCode: string;
-  socketId: string;
 }
 
 export interface ILobby {
@@ -15,8 +14,8 @@ export interface ServerInputData {
 }
 
 export interface ClientInputData {
+  lobby: ILobby;
   userName: string;
-  lobby?: ILobby;
 }
 
 export interface ServerToClientEvents {

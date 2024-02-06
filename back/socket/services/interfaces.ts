@@ -5,17 +5,17 @@ import {
   ServerToClientEvents,
 } from "../../../typings";
 
-interface ClientCreateLobby {
+interface IClientCreateLobby {
   io: Server<ClientToServerEvents, ServerToClientEvents>;
   socket: Socket<ClientToServerEvents, ServerToClientEvents>;
   userName: string;
 }
 
-interface ClientJoinLobby {
+interface IClientJoinLobby {
   io: Server<ClientToServerEvents, ServerToClientEvents>;
-  socket: Socket<ClientToServerEvents, ServerToClientEvents>;
-  userName: string;
   lobby: ILobby;
+  socket: Socket<ClientToServerEvents, ServerToClientEvents>;
+  userName: string;
 }
 
-export { ClientCreateLobby, ClientJoinLobby };
+export { IClientCreateLobby, IClientJoinLobby };

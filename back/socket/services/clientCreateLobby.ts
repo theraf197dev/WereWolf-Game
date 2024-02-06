@@ -1,14 +1,13 @@
 import { IUser, ILobby } from "../../../typings";
 import { generateLobbyUniqueId } from "../../helpers/helpers";
-import { ClientCreateLobby } from "./interfaces";
+import { IClientCreateLobby } from "./interfaces";
 
-export const createLobby = ({ io, socket, userName }: ClientCreateLobby) => {
+export const createLobby = ({ io, socket, userName }: IClientCreateLobby) => {
   socket.join(userName);
 
   const user: IUser = {
     userName,
     userCode: socket.id,
-    socketId: socket.id,
   };
 
   const lobby: ILobby = {

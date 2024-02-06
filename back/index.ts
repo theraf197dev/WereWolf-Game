@@ -26,8 +26,8 @@ io.on(
       createLobby({ io, socket, userName });
     });
 
-    socket.on("clientJoinLobby", ({ userName, lobby }) => {
-      joinLobby({ io, socket, userName, lobby });
+    socket.on("clientJoinLobby", ({ lobby, userName }) => {
+      joinLobby({ io, lobby, socket, userName });
     });
   }
 );
